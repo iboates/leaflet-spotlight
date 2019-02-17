@@ -19,10 +19,19 @@ $(document).ready(function() {
     sidebar = L.control.sidebar('sidebar').addTo(map);
 
      // Set the initial spotlight shape
+    $("#shape-selector").val("circle");
     spotlightShape = $("#shape-selector").val();
+
     // Attach a change listener to the shape selector box
     $("#shape-selector").on("change", function() {
-        spotlightShape = $("#shape-selector").val();
+
+        var spotlightValue = $("#shape-selector").val();
+
+        spotlightShape = spotlightValue;
+
+        $(".shape-params").hide();
+        $("#"+spotlightValue+"-params").show();
+
     });
 
 });

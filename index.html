@@ -27,6 +27,7 @@
     <script src="sidebar/js/leaflet-sidebar.min.js"></script>
 
     <script src="js/featureStyles.js"></script>
+    <!--<script src="js/spotlights.js"></script>-->
     <script src="js/init.js"></script>
     <script src="js/spotlightControl.js"></script>
 
@@ -51,17 +52,29 @@
         <!-- Tab panes -->
         <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
+
                 <h1 class="sidebar-header">
                     sidebar-v2
                     <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 
                 <fieldset>
-                    <label for="shape">Spotlight Shape: </label>
+                    <label for="shape-selector">Spotlight shape: </label>
                     <select name="Shape" id="shape-selector">
                         <option value="circle" selected="selected">Circle</option>
                         <option value="rectangle">Rectangle</option>
                     </select>
+                    <fieldset class="shape-params" id="circle-params">
+                        <label for="circle-radius-input">Circle radius: </label>
+                        <input id="circle-radius-input" />
+                    </fieldset>
+                    <fieldset class="shape-params" id="rectangle-params" style="display: none;">
+                        <label for="rectangle-width-input">Rectangle width: </label>
+                        <input id="rectangle-width-input" />
+                        <br>
+                        <label for="rectangle-height-input">Rectangle height: </label>
+                        <input id="rectangle-height-input" />
+                    </fieldset>
                 </fieldset>
 
             </div>

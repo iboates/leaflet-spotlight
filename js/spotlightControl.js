@@ -45,10 +45,17 @@ $(document).ready(function() {
         }
 
         if (spotlightShape == "circle") {
-            mouseShape = turf.circle([ev.latlng.lng, ev.latlng.lat], 50, {"steps": 128, "units": "meters"});
+            mouseShape = turf.circle(
+                [ev.latlng.lng, ev.latlng.lat],
+                $("#circle-radius-input").val(),
+                {"steps": 128, "units": "meters"}
+            );
         } else if (spotlightShape == "rectangle") {
             mouseShape = turf.envelope(turf.featureCollection([
-                turf.circle([ev.latlng.lng, ev.latlng.lat], 50, {"steps": 128, "units": "meters"})
+                turf.circle(
+                    [ev.latlng.lng, ev.latlng.lat],
+                    $("#rectangle-width-input").val(),
+                    {"steps": 128, "units": "meters"})
             ]));
         }
 
