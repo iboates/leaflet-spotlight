@@ -17,7 +17,7 @@ var pointStyle = {
     fillOpacity: 0
 };
 
-function spotlightStyle2(feature) {
+function spotlightStyle(feature) {
     return feature.properties.id == styleData.max0 ? {
         radius: 8,
         fillColor: "#880000",

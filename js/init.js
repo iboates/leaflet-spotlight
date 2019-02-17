@@ -20,5 +20,9 @@ $(document).ready(function() {
 
      // Set the initial spotlight shape
     spotlightShape = $("#shape-selector").val();
+    // Attach a change listener to the shape selector box
+    $("#shape-selector").on("change", function() {
+        spotlightShape = $("#shape-selector").val();
+    });
 
 });

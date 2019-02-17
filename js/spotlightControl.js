@@ -4,11 +4,6 @@
 
 $(document).ready(function() {
 
-    // Attach a change listenner to the shape selector box
-    $("#shape-selector").on("change", function() {
-        spotlightShape = $("#shape-selector").val();
-    });
-
     function getExtreme(gj, prop, minOrMax) {
 
         var featureId = -1;
@@ -68,7 +63,7 @@ $(document).ready(function() {
 
         spotlightHighlightLayer = L.geoJSON(spotlightPoints, {
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, spotlightStyle2(feature))
+                return L.circleMarker(latlng, spotlightStyle(feature))
             }
         }).addTo(map);
 
