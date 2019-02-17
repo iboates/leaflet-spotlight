@@ -55,14 +55,21 @@ $(document).ready(function() {
 
         } else if (spotlightShape == "rectangle") {
 
+            console.log($("#rectangle-rotation-input").val());
+
             var offsetX =  $("#rectangle-width-input").val()/2;
             var offsetY =  $("#rectangle-height-input").val()/2;
-            mouseShape = turf.envelope(turf.featureCollection([
-                turf.destination(mouseLocation, offsetY, 0, {"units": "meters"}),
-                turf.destination(mouseLocation, offsetX, 90, {"units": "meters"}),
-                turf.destination(mouseLocation, offsetY, 180, {"units": "meters"}),
-                turf.destination(mouseLocation, offsetX, -90, {"units": "meters"})
-            ]));
+            mouseShape = turf.transformRotate(
+                turf.envelope(
+                    turf.featureCollection([
+                        turf.destination(mouseLocation, offsetY, 0, {"units": "meters"}),
+                        turf.destination(mouseLocation, offsetX, 90, {"units": "meters"}),
+                        turf.destination(mouseLocation, offsetY, 180, {"units": "meters"}),
+                        turf.destination(mouseLocation, offsetX, -90, {"units": "meters"})
+                    ])
+                ),
+                parseFloat($("#rectangle-rotation-input").val())
+            );
 
         }
 
