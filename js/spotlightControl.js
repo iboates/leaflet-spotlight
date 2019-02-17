@@ -39,28 +39,34 @@ $(document).ready(function() {
         if (map.hasLayer(spotlightHighlightLayer)) {
             map.removeLayer(spotlightHighlightLayer);
         }
-
         if (map.hasLayer(spotlightLayer)) {
             map.removeLayer(spotlightLayer)
         }
 
+        var mouseLocation = [ev.latlng.lng, ev.latlng.lat];
+
         if (spotlightShape == "circle") {
+
             mouseShape = turf.circle(
-                [ev.latlng.lng, ev.latlng.lat],
+                mouseLocation,
                 $("#circle-radius-input").val(),
                 {"steps": 128, "units": "meters"}
             );
+
         } else if (spotlightShape == "rectangle") {
+
+            var offsetX =  $("#rectangle-width-input").val()/2;
+            var offsetY =  $("#rectangle-height-input").val()/2;
             mouseShape = turf.envelope(turf.featureCollection([
-                turf.circle(
-                    [ev.latlng.lng, ev.latlng.lat],
-                    $("#rectangle-width-input").val(),
-                    {"steps": 128, "units": "meters"})
+                turf.destination(mouseLocation, offsetY, 0, {"units": "meters"}),
+                turf.destination(mouseLocation, offsetX, 90, {"units": "meters"}),
+                turf.destination(mouseLocation, offsetY, 180, {"units": "meters"}),
+                turf.destination(mouseLocation, offsetX, -90, {"units": "meters"})
             ]));
+
         }
 
         var spotlightPoints = turf.pointsWithinPolygon(pointLayer.toGeoJSON(), mouseShape);
-
         styleData.max0 = getExtreme(spotlightPoints, "attr0", "max");
         styleData.max1 = getExtreme(spotlightPoints, "attr1", "max");
         styleData.max2 = getExtreme(spotlightPoints, "attr2", "max");
