@@ -15,23 +15,56 @@ $(document).ready(function() {
         }
     }).addTo(map);
 
-     // Add sidebar
-    sidebar = L.control.sidebar('sidebar').addTo(map);
+    spptlightShapeOptions = {
+        "circleRadius": 25,
+        "rectangleWidth": 25,
+        "rectangleHeight": 50,
+        "rectangleRotation": 15
+    }
 
-     // Set the initial spotlight shape
-    $("#shape-selector").val("circle");
-    spotlightShape = $("#shape-selector").val();
+    function dynamicCenterCircle(center) {
+        return turf.circle(
+                    center,
+                    50,
+                    {"steps": 128, "units": "meters"}
+                );
+    }
 
-    // Attach a change listener to the shape selector box
-    $("#shape-selector").on("change", function() {
+    function dynamicCenterRectangle(center) {
+        return turf.transformRotate(
+            turf.envelope(
+                turf.featureCollection([
+                    turf.destination(center, 25, 0, {"units": "meters"}),
+                    turf.destination(center, 15, 90, {"units": "meters"}),
+                    turf.destination(center, 25, 180, {"units": "meters"}),
+                    turf.destination(center, 15, -90, {"units": "meters"})
+                ])
+            ),
+            15
+        );
+    }
 
-        var spotlightValue = $("#shape-selector").val();
+//    $(map).spotlight(pointLayer, dynamicCenterCircle, spotlightStyle, highlightStyle);
+    $(map).spotlight(pointLayer, dynamicCenterRectangle, spotlightStyle, highlightStyle);
 
-        spotlightShape = spotlightValue;
 
-        $(".shape-params").hide();
-        $("#"+spotlightValue+"-params").show();
+//     // Add sidebar
+//    sidebar = L.control.sidebar('sidebar').addTo(map);
 
-    });
+//     // Set the initial spotlight shape
+//    $("#shape-selector").val("circle");
+//    spotlightShape = $("#shape-selector").val();
+//
+//    // Attach a change listener to the shape selector box
+//    $("#shape-selector").on("change", function() {
+//
+//        var spotlightValue = $("#shape-selector").val();
+//
+//        spotlightShape = spotlightValue;
+//
+//        $(".shape-params").hide();
+//        $("#"+spotlightValue+"-params").show();
+//
+//    });
 
 });
