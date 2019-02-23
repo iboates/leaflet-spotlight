@@ -51,7 +51,7 @@ $(document).ready(function() {
                             turf.destination(center, $("#rectangle-width-input").val()/2, -90, {"units": "meters"})
                         ])
                     ),
-                    $("#rectangle-rotation-input").val()
+                    parseFloat($("#rectangle-rotation-input").val())
                 );
             }
 
