@@ -15,6 +15,8 @@ $(document).ready(function() {
         }
     }).addTo(map);
 
+    $(map).spotlight();
+
     sidebar = L.control.sidebar('sidebar').addTo(map);
 
     var dynamicCenterCircle;
@@ -49,8 +51,7 @@ $(document).ready(function() {
                 );
             }
 
-            spotlightUUID = $(map).spotlight(pointLayer, dynamicCenterCircle, spotlightStyle, highlightStyle);
-            spotlightUUID = $(map).spotlight(pointLayer, dynamicCenterCircle2, spotlightStyle, highlightStyle);
+            spotlightUUID = $(map).addSpotlight(pointLayer, dynamicCenterCircle, spotlightStyle, highlightStyle);
 
         } else if (spotlightValue == "rectangle") {
 
@@ -68,7 +69,7 @@ $(document).ready(function() {
                 );
             }
 
-            spotlightUUID =  $(map).spotlight(pointLayer, dynamicCenterRectangle, spotlightStyle, highlightStyle);
+            spotlightUUID =  $(map).addSpotlight(pointLayer, dynamicCenterRectangle, spotlightStyle, highlightStyle);
 
         }
 
