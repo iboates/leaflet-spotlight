@@ -19,11 +19,15 @@ $(document).ready(function() {
 
     var dynamicCenterCircle;
     var dynamicCenterRectangle;
+    var spotlightUUID = null;
 
     // Attach a change listener to the shape selector box
     $("#shape-selector").on("change", function() {
 
-        $(map).spotlight("off");
+        console.log
+        if (spotlightUUID !== null) {
+            $(map).removeSpotlight(spotlightUUID);
+        }
 
         var spotlightValue = $("#shape-selector").val();
 
@@ -37,7 +41,16 @@ $(document).ready(function() {
                 );
             }
 
-            $(map).spotlight("on", pointLayer, dynamicCenterCircle, spotlightStyle, highlightStyle);
+            dynamicCenterCircle2 = function (center) {
+                return turf.circle(
+                    center,
+                    parseFloat($("#circle-radius-input").val())*2,
+                    {"steps": 128, "units": "meters"}
+                );
+            }
+
+            spotlightUUID = $(map).spotlight(pointLayer, dynamicCenterCircle, spotlightStyle, highlightStyle);
+            spotlightUUID = $(map).spotlight(pointLayer, dynamicCenterCircle2, spotlightStyle, highlightStyle);
 
         } else if (spotlightValue == "rectangle") {
 
@@ -55,12 +68,15 @@ $(document).ready(function() {
                 );
             }
 
-            $(map).spotlight("on", pointLayer, dynamicCenterRectangle, spotlightStyle, highlightStyle);
+            spotlightUUID =  $(map).spotlight(pointLayer, dynamicCenterRectangle, spotlightStyle, highlightStyle);
 
         }
 
         $(".shape-params").hide();
         $("#"+spotlightValue+"-params").show();
+
+        console.log(spotlightUUID);
+        console.log(map);
 
     });
 

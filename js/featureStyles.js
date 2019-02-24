@@ -39,4 +39,22 @@ function highlightStyle(feature) {
             fillOpacity: 1
         }
     }
-}
+};
+
+function simpleHighlightStyle1(feature) {
+    return {
+        radius: 5,
+        opacity: 0,
+        fillColor: "#ff0000",
+        fillOpacity: 1
+    }
+};
+
+function simpleHighlightStyle2(feature) {
+    return {
+        radius: 3,
+        opacity: 0,
+        fillColor: "#0000ff",
+        fillOpacity: 1
+    }
+};
