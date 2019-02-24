@@ -13,10 +13,9 @@
                     this.removeLayer(this._leafletSpotlight_spotlightLayer);
                 }
 
-                var  mouseShape = spotlightShape([ev.latlng.lng, ev.latlng.lat]);
+                var mouseShape = spotlightShape([ev.latlng.lng, ev.latlng.lat]);
 
                 var highlightedPoints = turf.pointsWithinPolygon(pointLayer.toGeoJSON(), mouseShape);
-
                 this._leafletSpotlight_spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
                     pointToLayer: function (feature, latlng) {
                         return L.circleMarker(latlng, highlightStyle(feature))
