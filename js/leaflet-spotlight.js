@@ -23,7 +23,7 @@
 
                 // Find which points are highlighted by seeing if they are within the spotlight
                 var highlightedPoints = turf.pointsWithinPolygon(
-                    pointLayer.toGeoJSON(),
+                    this._leafletSpotlight[uuid]._targetLayer.toGeoJSON(),
                     currentSpotlight._spotlightShape([ev.latlng.lng, ev.latlng.lat])
                 );
 

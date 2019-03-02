@@ -1,0 +1,13 @@
+#map-left {
+    background-color: "#ff0000";
+    height: 98vh;
+    width: 45vw;
+    float: left;
+}
+
+#map-right {
+    background-color: "#0000ff";
+    height: 98vh;
+    width: 45vw;
+    float: right;
+}
