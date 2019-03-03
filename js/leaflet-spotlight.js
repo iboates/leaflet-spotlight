@@ -28,11 +28,19 @@
                 );
 
                 // Add the highlighted features to the map as a layer
-                currentSpotlight._spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, currentSpotlight._highlightStyle(feature))
-                    }
-                }).addTo(this);
+                if (typeof currentSpotlight._highlightStyle !== "function") {
+                    currentSpotlight._spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, currentSpotlight._highlightStyle)
+                        }
+                    }).addTo(this);
+                } else {
+                    currentSpotlight._spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, currentSpotlight._highlightStyle(feature))
+                        }
+                    }).addTo(this);
+                }
 
                 // Add the spotlight to the map as a layer
                 currentSpotlight._spotlightLayer = L.geoJSON(currentSpotlight._spotlightShape([ev.latlng.lng, ev.latlng.lat]), {
