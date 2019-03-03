@@ -44,20 +44,21 @@ var dynamicCircle = function (center) {
 // Initialize leaflet-spotlight on the map
 leafletSpotlight(map);
 
+// Set up add/remove controls
 var toggleButton = document.getElementById("toggle-button");
 var hasSpotlight = false;
 var spotlightUUID;
 
+// Make the button toggle add & remove of the spotlight
 toggleButton.addEventListener("click", function(e) {
     if (!hasSpotlight) {
+        // Add the spotlight and save the generated UUID
         spotlightUUID = addLeafletSpotlight(map, pointLayer, dynamicCircle, spotlightStyle, highlightStyle);
         toggleButton.innerHTML = 'Remove Spotlight';
     } else {
+        // Remove the spotlight via its UUID
         removeLeafletSpotlight(map, spotlightUUID);
         toggleButton.innerHTML = 'Add Spotlight';
     }
     hasSpotlight = !hasSpotlight;
 });
-
-// Add the spotlight to the map
-//addLeafletSpotlight(map, pointLayer, dynamicCircle, spotlightStyle, highlightStyle);
