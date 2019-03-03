@@ -7,42 +7,42 @@ function leafletSpotlight(map) {
     // Create a mousemove event listener for this spotlight
     map.addEventListener('mousemove', function(ev) {
 
-        for (var uuid in this._leafletSpotlight) {
+        for (var spotlightId in this._leafletSpotlight) {
         
-            var currentSpotlight = this._leafletSpotlight[uuid];
+            var currentSpotlight = this._leafletSpotlight[spotlightId];
 
-            // On each mouse movement, remove the spotlight & highlighted features layer for this UUID
-            if (this.hasLayer(currentSpotlight._spotlightHighlightLayer)) {
-                this.removeLayer(currentSpotlight._spotlightHighlightLayer);
+            // On each mouse movement, remove the spotlight & highlighted features layer for this spotlightId
+            if (this.hasLayer(currentSpotlight.spotlightHighlightLayer)) {
+                this.removeLayer(currentSpotlight.spotlightHighlightLayer);
             }
-            if (this.hasLayer(currentSpotlight._spotlightLayer)) {
-                this.removeLayer(currentSpotlight._spotlightLayer);
+            if (this.hasLayer(currentSpotlight.spotlightLayer)) {
+                this.removeLayer(currentSpotlight.spotlightLayer);
             }
 
             // Find which points are highlighted by seeing if they are within the spotlight
             var highlightedPoints = turf.pointsWithinPolygon(
-                this._leafletSpotlight[uuid]._targetLayer.toGeoJSON(),
-                currentSpotlight._spotlightShape([ev.latlng.lng, ev.latlng.lat])
+                this._leafletSpotlight[spotlightId].targetLayer.toGeoJSON(),
+                currentSpotlight.spotlightShape([ev.latlng.lng, ev.latlng.lat])
             );
 
             // Add the highlighted features to the map as a layer
-            if (typeof currentSpotlight._highlightStyle !== "function") {
-                currentSpotlight._spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+            if (typeof currentSpotlight.highlightStyle !== "function") {
+                currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
                     pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, currentSpotlight._highlightStyle)
+                        return L.circleMarker(latlng, currentSpotlight.highlightStyle)
                     }
                 }).addTo(this);
             } else {
-                currentSpotlight._spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+                currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
                     pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, currentSpotlight._highlightStyle(feature))
+                        return L.circleMarker(latlng, currentSpotlight.highlightStyle(feature))
                     }
                 }).addTo(this);
             }
 
             // Add the spotlight to the map as a layer
-            currentSpotlight._spotlightLayer = L.geoJSON(currentSpotlight._spotlightShape([ev.latlng.lng, ev.latlng.lat]), {
-                style: currentSpotlight._spotlightStyle
+            currentSpotlight.spotlightLayer = L.geoJSON(currentSpotlight.spotlightShape([ev.latlng.lng, ev.latlng.lat]), {
+                style: currentSpotlight.spotlightStyle
             }).addTo(this);
 
         }
@@ -51,36 +51,31 @@ function leafletSpotlight(map) {
 
 };
 
-function addLeafletSpotlight(map, pointLayer, spotlightShape, spotlightStyle, highlightStyle) {
+function addLeafletSpotlight(map, spotlight, spotlightId) {
 
-        // Generate a UUID for this spotlight and add it to the spotlight registry
-        // https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    if (typeof spotlightId === "undefined") {
+        var spotlightId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
-        map._leafletSpotlight[uuid] = {
-            "_targetLayer": pointLayer,
-            "_spotlightShape": spotlightShape,
-            "_spotlightStyle": spotlightStyle,
-            "_highlightStyle": highlightStyle
-        };
+    }
 
-        // Returns this UUID so it can be used to remove the spotlight later if necessary.
-        return uuid;
+    map._leafletSpotlight[spotlightId] = spotlight
 
-};
+    return spotlightId;
 
-function removeLeafletSpotlight(map, spotlightUUID) {
+}
+
+function removeLeafletSpotlight(map, spotlightId) {
 
     // Remove the spotlight & highlighted feature layers from the map
-    if (map.hasLayer(map._leafletSpotlight[spotlightUUID]._spotlightLayer)) {
-        map.removeLayer(map._leafletSpotlight[spotlightUUID]._spotlightHighlightLayer);
+    if (map.hasLayer(map._leafletSpotlight[spotlightId].spotlightLayer)) {
+        map.removeLayer(map._leafletSpotlight[spotlightId].spotlightHighlightLayer);
     }
-    if (map.hasLayer(map._leafletSpotlight[spotlightUUID]._spotlightLayer)) {
-        map.removeLayer(map._leafletSpotlight[spotlightUUID]._spotlightLayer);
+    if (map.hasLayer(map._leafletSpotlight[spotlightId].spotlightLayer)) {
+        map.removeLayer(map._leafletSpotlight[spotlightId].spotlightLayer);
     }
 
-    delete map._leafletSpotlight[spotlightUUID];
+    delete map._leafletSpotlight[spotlightId];
 
 };

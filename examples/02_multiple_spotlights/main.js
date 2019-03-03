@@ -1,6 +1,9 @@
 // Initialize Leaflet map
 var map = L.map('map').setView([50.1109, 8.6821], 15);
 
+// Initialize leaflet-spotlight on the map
+leafletSpotlight(map);
+
 // Define default style for points
 var pointStyle = {
     radius: 2,
@@ -67,8 +70,25 @@ var dynamicCircleBlue = function (center) {
     );
 };
 
-// Initialize leaflet-spotlight on the map
-leafletSpotlight(map);
+// Create the spotlights to be added to the map
+var spotlightRed = {
+    highlightStyle: highlightStyleRed,
+    spotlightShape: dynamicCircleRed,
+    spotlightStyle: spotlightStyle,
+    targetLayer: pointLayer
+};
+var spotlightGreen = {
+    highlightStyle: highlightStyleGreen,
+    spotlightShape: dynamicCircleGreen,
+    spotlightStyle: spotlightStyle,
+    targetLayer: pointLayer
+};
+var spotlightBlue = {
+    highlightStyle: highlightStyleBlue,
+    spotlightShape: dynamicCircleBlue,
+    spotlightStyle: spotlightStyle,
+    targetLayer: pointLayer
+};
 
 // Set up add/remove controls
 var toggleButtonRed = document.getElementById("toggle-button-red");
@@ -77,19 +97,19 @@ var toggleButtonBlue = document.getElementById("toggle-button-blue");
 var hasRedSpotlight = false;
 var hasGreenSpotlight = false;
 var hasBlueSpotlight = false;
-var redSpotlightUUID;
-var greenSpotlightUUID;
-var blueSpotlightUUID;
+var redSpotlightId;
+var greenSpotlightId;
+var blueSpotlightId;
 
 // Make the button toggle add & remove of the spotlight
 toggleButtonRed.addEventListener("click", function(e) {
     if (!hasRedSpotlight) {
-        // Add the spotlight and save the generated UUID
-        redSpotlightUUID = addLeafletSpotlight(map, pointLayer, dynamicCircleRed, spotlightStyle, highlightStyleRed);
+        // Add the spotlight and save the generated ID
+        redSpotlightId = addLeafletSpotlight(map, spotlightRed);
         toggleButtonRed.innerHTML = 'Remove Red Spotlight';
     } else {
-        // Remove the spotlight via its UUID
-        removeLeafletSpotlight(map, redSpotlightUUID);
+        // Remove the spotlight via its ID
+        removeLeafletSpotlight(map, redSpotlightId);
         toggleButtonRed.innerHTML = 'Add Red Spotlight';
     }
     hasRedSpotlight = !hasRedSpotlight;
@@ -98,12 +118,12 @@ toggleButtonRed.addEventListener("click", function(e) {
 // Make the button toggle add & remove of the spotlight
 toggleButtonGreen.addEventListener("click", function(e) {
     if (!hasGreenSpotlight) {
-        // Add the spotlight and save the generated UUID
-        greenSpotlightUUID = addLeafletSpotlight(map, pointLayer, dynamicCircleGreen, spotlightStyle, highlightStyleGreen);
+        // Add the spotlight and save the generated ID
+        greenSpotlightId = addLeafletSpotlight(map, spotlightGreen);
         toggleButtonGreen.innerHTML = 'Remove Green Spotlight';
     } else {
-        // Remove the spotlight via its UUID
-        removeLeafletSpotlight(map, greenSpotlightUUID);
+        // Remove the spotlight via its ID
+        removeLeafletSpotlight(map, greenSpotlightId);
         toggleButtonGreen.innerHTML = 'Add Green Spotlight';
     }
     hasGreenSpotlight = !hasGreenSpotlight;
@@ -112,12 +132,12 @@ toggleButtonGreen.addEventListener("click", function(e) {
 // Make the button toggle add & remove of the spotlight
 toggleButtonBlue.addEventListener("click", function(e) {
     if (!hasBlueSpotlight) {
-        // Add the spotlight and save the generated UUID
-        blueSpotlightUUID = addLeafletSpotlight(map, pointLayer, dynamicCircleBlue, spotlightStyle, highlightStyleBlue);
+        // Add the spotlight and save the generated ID
+        blueSpotlightId = addLeafletSpotlight(map, spotlightBlue);
         toggleButtonBlue.innerHTML = 'Remove Blue Spotlight';
     } else {
-        // Remove the spotlight via its UUID
-        removeLeafletSpotlight(map, blueSpotlightUUID);
+        // Remove the spotlight via its ID
+        removeLeafletSpotlight(map, blueSpotlightId);
         toggleButtonBlue.innerHTML = 'Add Blue Spotlight';
     }
     hasBlueSpotlight = !hasBlueSpotlight;

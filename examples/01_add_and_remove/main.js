@@ -1,6 +1,9 @@
 // Initialize Leaflet map
 var map = L.map('map').setView([50.1109, 8.6821], 15);
 
+// Initialize leaflet-spotlight on the map
+leafletSpotlight(map);
+
 // Define default style for points
 var pointStyle = {
     radius: 2,
@@ -41,23 +44,27 @@ var dynamicCircle = function (center) {
     );
 };
 
-// Initialize leaflet-spotlight on the map
-leafletSpotlight(map);
+// Create the spotlight to be added to the map
+var spotlight = {
+    highlightStyle: highlightStyle,
+    spotlightShape: dynamicCircle,
+    spotlightStyle: spotlightStyle,
+    targetLayer: pointLayer
+};
 
 // Set up add/remove controls
 var toggleButton = document.getElementById("toggle-button");
 var hasSpotlight = false;
-var spotlightUUID;
 
 // Make the button toggle add & remove of the spotlight
 toggleButton.addEventListener("click", function(e) {
     if (!hasSpotlight) {
         // Add the spotlight and save the generated UUID
-        spotlightUUID = addLeafletSpotlight(map, pointLayer, dynamicCircle, spotlightStyle, highlightStyle);
+        spotlightId = addLeafletSpotlight(map, spotlight);
         toggleButton.innerHTML = 'Remove Spotlight';
     } else {
         // Remove the spotlight via its UUID
-        removeLeafletSpotlight(map, spotlightUUID);
+        removeLeafletSpotlight(map, spotlightId);
         toggleButton.innerHTML = 'Add Spotlight';
     }
     hasSpotlight = !hasSpotlight;

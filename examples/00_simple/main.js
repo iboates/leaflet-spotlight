@@ -1,6 +1,9 @@
 // Initialize Leaflet map
 var map = L.map('map').setView([50.1109, 8.6821], 15);
 
+// Initialize leaflet-spotlight on the map
+leafletSpotlight(map);
+
 // Define default style for points
 var pointStyle = {
     radius: 2,
@@ -41,8 +44,13 @@ var dynamicCircle = function (center) {
     );
 };
 
-// Initialize leaflet-spotlight on the map
-leafletSpotlight(map);
+// Create the spotlight to be added to the map
+var spotlight = {
+    highlightStyle: highlightStyle,
+    spotlightShape: dynamicCircle,
+    spotlightStyle: spotlightStyle,
+    targetLayer: pointLayer
+};
 
 // Add the spotlight to the map
-addLeafletSpotlight(map, pointLayer, dynamicCircle, spotlightStyle, highlightStyle);
+addLeafletSpotlight(map, spotlight);
