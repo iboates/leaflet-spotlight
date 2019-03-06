@@ -1,7 +1,7 @@
 function leafletSpotlight(map) {
 
     // Add an object to act as a registry of layers for various spotlights and highlighted features
-    // As spotlights are added, a UUID will be generated for one which serves here as a key to its layers.
+    // As spotlights are added, an ID will be generated for one which serves here as a key to its layers.
     map._leafletSpotlight = {};
 
     // Create a mousemove event listener for this spotlight
