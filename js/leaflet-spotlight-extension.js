@@ -14,7 +14,7 @@ L.SpotlightHandler = L.Handler.extend({
         L.DomEvent.off(document, 'mousemove', this._doSomething, this);
     },
 
-    _doSomething: function(ev) {
+    _refreshSpotlights: function(ev) {
 
         // Create a mousemove event listener for this spotlight
         for (var spotlightId in this._map._spotlightRegistry) {
