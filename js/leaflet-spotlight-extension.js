@@ -2,23 +2,37 @@ L.Map.include({
 
     _spotlightRegistry: {},
 
+    addSpotlight: function(spotlight) {
+        console.log("adding spotlight");
+        this._spotlightRegistry[spotlight.id] = spotlight.options;
+        console.log(this._spotlightRegistry);
+    },
+
+    removeSpotlight: function(spotlight) {
+        console.log("removing spotlight");
+        delete this._spotlightRegistry[spotlight.id];
+        console.log(this._spotlightRegistry);
+    }
+
 });
+
+L.Map.addInitHook('addHandler', 'spotlight', L.SpotlightHandler);
 
 L.SpotlightHandler = L.Handler.extend({
 
     addHooks: function() {
-        L.DomEvent.on(document, 'mousemove', this._doSomething, this);
+        L.DomEvent.on(document, 'mousemove', this._refreshSpotlights, this);
     },
 
     removeHooks: function() {
-        L.DomEvent.off(document, 'mousemove', this._doSomething, this);
+        L.DomEvent.off(document, 'mousemove', this._refreshSpotlights, this);
     },
 
     _refreshSpotlights: function(ev) {
 
         // Create a mousemove event listener for this spotlight
         for (var spotlightId in this._map._spotlightRegistry) {
-        
+
             var currentSpotlight = this._map._spotlightRegistry[spotlightId];
 
             // On each mouse movement, remove the spotlight & highlighted features layer for this._map spotlightId
@@ -56,13 +70,33 @@ L.SpotlightHandler = L.Handler.extend({
             }).addTo(this._map);
 
         }
-    
+
     }
 
 });
 
-L.Map.addInitHook('addHandler', 'spotlight', L.SpotlightHandler);
 
-L.Layer.Spotlight = L.Layer.extend({
+L.Spotlight = L.Class.extend({
 
-})
+    options: {
+        highlightStyle: 1,
+        spotlightShape: 1,
+        spotlightStyle: 1,
+        targetLayer: 1
+    },
+
+    initialize: function(id, options) {
+        this.id = id;
+        L.setOptions(this, options);
+    },
+
+    addTo: function(map) {
+        console.log(this);
+        map.addSpotlight(this);
+    }
+
+});
+
+L.spotlight = function(id, options) {
+    return new L.Spotlight(id, options);
+};
