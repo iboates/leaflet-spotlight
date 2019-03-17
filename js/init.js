@@ -55,15 +55,11 @@ var mySpotlight = L.spotlight("aaa", {
     targetLayer: pointLayer
 });
 
-//var mySpotlight2 = new L.Spotlight("aaa", {
-//    highlightStyle: 1,
-//    spotlightShape: 2,
-//    spotlightStyle: 3,
-//    targetLayer: 4
-//});
-
-//map.addSpotlight(mySpotlight);
-
-mySpotlight.addTo(map);
-
-//map.removeSpotlight(mySpotlight);
+var toggleButton = document.getElementById("toggle-spotlight-button");
+toggleButton.addEventListener("click", function(e) {
+    if (!map.hasSpotlight(mySpotlight)) {
+        mySpotlight.addTo(map);
+    } else {
+        map.removeSpotlight(mySpotlight)
+    }
+});

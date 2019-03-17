@@ -3,15 +3,22 @@ L.Map.include({
     _spotlightRegistry: {},
 
     addSpotlight: function(spotlight) {
-//        console.log("adding spotlight");
         this._spotlightRegistry[spotlight.id] = spotlight.options;
-//        console.log(this._spotlightRegistry);
     },
 
     removeSpotlight: function(spotlight) {
-//        console.log("removing spotlight");
+        this.removeLayer(this._spotlightRegistry[spotlight.id].spotlightLayer);
+        this.removeLayer(this._spotlightRegistry[spotlight.id].spotlightHighlightLayer);
         delete this._spotlightRegistry[spotlight.id];
-//        console.log(this._spotlightRegistry);
+    },
+
+    hasSpotlight: function(spotlight) {
+    console.log(spotlight);
+        if (this._spotlightRegistry[spotlight.id] == spotlight.options) {
+            return true
+        } else {
+            return false
+        }
     }
 
 });
@@ -92,7 +99,6 @@ L.Spotlight = L.Class.extend({
     },
 
     addTo: function(map) {
-//        console.log(this);
         map.addSpotlight(this);
     }
 
