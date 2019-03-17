@@ -26,14 +26,8 @@ L.Map.include({
 L.SpotlightHandler = L.Handler.extend({
 
     addHooks: function() {
-//        L.DomEvent.on(document, 'mousemove', this._refreshSpotlights, this);
-//        this._map.addEventListener('mousemove', function(ev) {console.log(ev)})
         this._map.addEventListener('mousemove', this._refreshSpotlights);
     },
-
-//    removeHooks: function() {
-//        L.DomEvent.off(document, 'mousemove', this._refreshSpotlights, this);
-//    },
 
     _refreshSpotlights: function(ev) {
 
