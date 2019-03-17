@@ -8,6 +8,8 @@ function leafletSpotlight(map) {
     map.addEventListener('mousemove', function(ev) {
 
         for (var spotlightId in this._leafletSpotlight) {
+
+        console.log(ev)
         
             var currentSpotlight = this._leafletSpotlight[spotlightId];
 
