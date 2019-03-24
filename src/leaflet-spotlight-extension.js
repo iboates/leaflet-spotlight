@@ -50,19 +50,40 @@ L.SpotlightHandler = L.Handler.extend({
                 currentSpotlight.spotlightShape([ev.latlng.lng, ev.latlng.lat])
             );
 
-            // Add the highlighted features to the map as a layer
-            if (typeof currentSpotlight.highlightStyle !== "function") {
+            if (currentSpotlight.spotlightType == 'circleMarker') {
+
+                // Add the highlighted features to the map as a layer
+                if (typeof currentSpotlight.highlightStyle !== "function") {
+                    currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, currentSpotlight.highlightStyle)
+                        }
+                    }).addTo(this);
+                } else {
+                    currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, currentSpotlight.highlightStyle(feature))
+                        }
+                    }).addTo(this);
+                }
+
+            } else if (currentSpotlight.spotlightType == 'marker') {
+
+                // Add the highlighted features to the map as a layer
+                if (typeof currentSpotlight.markerOptions !== "function") {
+                    currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
+                        pointToLayer: function (feature, latlng) {
+                            return L.marker(latlng, currentSpotlight.markerOptions)
+                        }
+                    }).addTo(this);
+                } else {
                 currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, currentSpotlight.highlightStyle)
-                    }
-                }).addTo(this);
-            } else {
-                currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, currentSpotlight.highlightStyle(feature))
-                    }
-                }).addTo(this);
+                        pointToLayer: function (feature, latlng) {
+                            return L.marker(latlng, currentSpotlight.markerOptions(feature))
+                        }
+                    }).addTo(this);
+                }
+
             }
 
             // Add the spotlight to the map as a layer
@@ -81,9 +102,11 @@ L.Map.addInitHook('addHandler', 'spotlight', L.SpotlightHandler);
 L.Spotlight = L.Class.extend({
 
     options: {
+        spotlightType: 1,
         highlightStyle: 1,
         spotlightShape: 1,
         spotlightStyle: 1,
+        markerOptions: 1,
         targetLayer: 1
     },
 

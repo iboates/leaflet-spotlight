@@ -43,20 +43,29 @@ var mySpotlightStyle = {
 };
 
 // Define a style for a leaflet point
-var myHighlightStyle = {
-        radius: 3,
-        opacity: 0,
-        fillColor: "#ff0000",
-        fillOpacity: 1
+var myMarkerOptions = {
+    icon: L.icon({
+        iconUrl: '../img/marker-icon-blue.png'
+    })
 };
 
 // Define a spotlight object and add it to the map using the ".addTo()" method
 var mySpotlight = L.spotlight({
-    highlightStyle: myHighlightStyle, // Style with which highlighted points shall be drawn
+    spotlightType: "marker",
     spotlightShape: dynamicCenterCircle, // Function which takes leaflet point and returns a turf polygon
+    markerOptions: myMarkerOptions, // Style with which the spotlight itself shall be drawn
     spotlightStyle: mySpotlightStyle, // Style with which the spotlight itself shall be drawn
     targetLayer: pointLayer // Layer onto which to apply the spotlight
-}).addTo(map);
+});
 
-// Alternate method of adding a spotlight to a map
-// map.addSpotlight(mySpotlight);
+// Make buttons control spotlight
+var toggleButton = document.getElementById("toggle-spotlight-button");
+toggleButton.addEventListener("click", function(e) {
+    if (!map.hasSpotlight(mySpotlight)) {
+        mySpotlight.addTo(map);
+        // Alternate method of adding a spotlight to a map
+        // map.addSpotlight(mySpotlight);
+    } else {
+        map.removeSpotlight(mySpotlight)
+    }
+});
