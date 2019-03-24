@@ -2,7 +2,14 @@
     height: 90vh;
 }
 
-.toggle-button {
-    height: 8vh;
-    width: 32vw;
+#toggle-spotlight1-button {
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+
+#toggle-spotlight2-button {
+    float: right;
+    height: 100%;
+    width: 50%;
 }
