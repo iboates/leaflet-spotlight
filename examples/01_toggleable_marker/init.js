@@ -45,7 +45,9 @@ var mySpotlightStyle = {
 // Define a style for a leaflet point
 var myMarkerOptions = {
     icon: L.icon({
-        iconUrl: '../img/marker-icon-blue.png'
+        iconUrl: '../img/marker-icon-blue.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
     })
 };
 

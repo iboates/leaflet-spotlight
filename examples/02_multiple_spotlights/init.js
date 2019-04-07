@@ -83,12 +83,14 @@ function myHighlightStyle2(feature) {
 
 // Define spotlight objects
 var mySpotlight1 = L.spotlight({
+    spotlightType: "circleMarker",
     highlightStyle: myHighlightStyle1,
     spotlightShape: dynamicCenterCircle1,
     spotlightStyle: mySpotlightStyle,
     targetLayer: pointLayer
 });
 var mySpotlight2 = L.spotlight({
+    spotlightType: "circleMarker",
     highlightStyle: myHighlightStyle2,
     spotlightShape: dynamicCenterCircle2,
     spotlightStyle: mySpotlightStyle,

@@ -85,30 +85,6 @@ L.SpotlightHandler = L.Handler.extend({
                     }).addTo(this);
                 }
 
-            } else if (currentSpotlight.spotlightType == 'popup') {
-
-                currentSpotlight.spotlightHighlightLayer = L.geoJSON(highlightedPoints, {
-
-                    pointToLayer: function (feature, latlng) {
-
-                        var marker = L.marker(latlng, {
-                            icon: L.icon({
-                                iconUrl: L.Icon.Default
-                            })
-                        });
-
-                        marker.bindPopup(currentSpotlight.popupContent(feature));
-
-                        return marker
-
-                    }
-
-                })
-
-                currentSpotlight.spotlightHighlightLayer.on("add", function (event) {
-                    event.target.openPopup();
-                }).addTo(this);
-
             }
 
             // Add the spotlight to the map as a layer

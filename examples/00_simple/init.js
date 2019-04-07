@@ -52,6 +52,7 @@ var myHighlightStyle = {
 
 // Define a spotlight object and add it to the map using the ".addTo()" method
 var mySpotlight = L.spotlight({
+    spotlightType: "circleMarker",
     highlightStyle: myHighlightStyle, // Style with which highlighted points shall be drawn
     spotlightShape: dynamicCenterCircle, // Function which takes leaflet point and returns a turf polygon
     spotlightStyle: mySpotlightStyle, // Style with which the spotlight itself shall be drawn
