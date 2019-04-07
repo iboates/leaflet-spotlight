@@ -20,4 +20,6 @@ Import the library into your HTML document. Make sure that it is imported AFTER 
 Detailed examples for various use cases can be found in the
 [examples](https://github.com/iboates/leaflet-spotlight/tree/master/examples) folder.
 
-<script src="https://gist.github.com/iboates/88edf2d2f58a4c130868e9936632ce63.js"></script>
+{::nomarkdown}
+<iframe src="https://iboates.github.io/examples/00_simple/index"></iframe>
+{:/}
