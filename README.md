@@ -43,3 +43,9 @@ A (toggleable) pair of spotlights, each of which selectively highlights points b
 
 A (toggleable) pair of marker-based spotlights, each of which selectively highlights points based on their attributes [(Demo)](https://iboates.github.io/examples/02_multiple_spotlights_marker/index) [(Source)](https://github.com/iboates/leaflet-spotlight/tree/master/examples/02_multiple_spotlights_marker)
 </p>
+
+## How it works (generally)
+
+The plugin enables an `L.Map` object to manage new `L.Spotlight` objects, which are linked to an `L.Layer` object in the map. You as the developer must define a function which receives a receives an `L.latlng` (which will be the user's mouse cursor), and constructs from it a `turf.js` Polygon. You also must specify either an `L.Style` object or a function which returns one, which will indicate how to draw the features which are contained within the spotlight area. You can also specify the style of the spotlight on the map itself.
+
+See the [javascript for the simple example](https://github.com/iboates/leaflet-spotlight/blob/master/examples/00_simple/init.js) for a detailed walkthrough.
