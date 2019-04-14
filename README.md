@@ -9,6 +9,14 @@ A Leaflet plugin for creating a "highlight" effect on features near the user's c
 
 ## Installation
 
+With npm:
+
+```
+npm i leaflet-spotlight
+```
+
+Manually:
+
 Import the library into your HTML document. Make sure that it is imported AFTER Leaflet and turf.js
 
 ```
