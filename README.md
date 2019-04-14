@@ -28,19 +28,18 @@ A simple spotlight highlighting all points [(Demo)](https://iboates.github.io/ex
 
 <p align="center">
 <img src="gif/spotlight_2.gif" width="400" vertical-align="middle">
-</p>
 
 A (toggleable) simple marker-based spotlight highlighting all points [(Demo)](https://iboates.github.io/examples/01_toggleable_marker/index) [(Source)](https://github.com/iboates/leaflet-spotlight/tree/master/examples/01_toggleable_marker)
+</p>
 
 <p align="center">
 <img src="gif/spotlight_3.gif" width="400" vertical-align="middle">
-</p>
 
 A (toggleable) pair of spotlights, each of which selectively highlights points based on their attributes [(Demo)](https://iboates.github.io/examples/02_multiple_spotlights/index) [(Source)](https://github.com/iboates/leaflet-spotlight/tree/master/examples/02_multiple_spotlights)
-
+</p>
 
 <p align="center">
 <img src="gif/spotlight_4.gif" width="400" vertical-align="middle">
-</p>
 
 A (toggleable) pair of marker-based spotlights, each of which selectively highlights points based on their attributes [(Demo)](https://iboates.github.io/examples/02_multiple_spotlights_marker/index) [(Source)](https://github.com/iboates/leaflet-spotlight/tree/master/examples/02_multiple_spotlights_marker)
+</p>
