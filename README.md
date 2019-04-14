@@ -19,11 +19,15 @@ Import the library into your HTML document. Make sure that it is imported AFTER 
 
 Detailed examples for various use cases can be found in the
 [examples](https://github.com/iboates/leaflet-spotlight/tree/master/examples) folder.
-
-<img src="gif/spotlight_1.gif" width="400">
-
-<img src="gif/spotlight_2.gif" width="400">
-
-<img src="gif/spotlight_3.gif" width="400">
-
-<img src="gif/spotlight_4.gif" width="400">
+<p align="center">
+<img src="gif/spotlight_1.gif" width="400" vertical-align="middle">
+</p>
+<p align="center">
+<img src="gif/spotlight_2.gif" width="400" vertical-align="middle">
+  </p>
+<p align="center">
+<img src="gif/spotlight_3.gif" width="400" vertical-align="middle">
+  </p>
+<p align="center">
+<img src="gif/spotlight_4.gif" width="400" vertical-align="middle">
+</p>
