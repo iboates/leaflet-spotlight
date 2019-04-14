@@ -20,7 +20,4 @@ Import the library into your HTML document. Make sure that it is imported AFTER 
 Detailed examples for various use cases can be found in the
 [examples](https://github.com/iboates/leaflet-spotlight/tree/master/examples) folder.
 
-![](gif/spotlight_1.gif)
-![](gif/spotlight_2.gif)
-![](gif/spotlight_3.gif)
-![](gif/spotlight_4.gif)
+<img src="gif/spotlight_1.gif" width="400">
