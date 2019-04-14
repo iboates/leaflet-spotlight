@@ -1,0 +1,25 @@
+{
+  "name": "leaflet-spotlight",
+  "version": "1.0.0",
+  "description": "Leaflet plugin for dynamically highlighting features of a layer near the mouse ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iboates/leaflet-spotlight.git"
+  },
+  "keywords": [
+    "leaflet",
+    "gis",
+    "mapping",
+    "map"
+  ],
+  "author": "Isaac Boates",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iboates/leaflet-spotlight/issues"
+  },
+  "homepage": "https://github.com/iboates/leaflet-spotlight#readme"
+}
